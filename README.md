@@ -1,60 +1,56 @@
-[![Circle CI](https://circleci.com/gh/raineroviir/react-redux-socketio-chat.svg?style=svg)](https://circleci.com/gh/raineroviir/react-redux-socketio-chat)
+## React Chat App
+![Screencast](https://github.com/tonyspiro/react-chat-app/blob/master/screencast.gif)
 
-# React-redux-socketio-chat
+This is an example of a basic real time chat app using React, Socket.io and Cosmic JS.  This example consists of the following:
 
-![alt tag](ReadmeVideo.gif)
-To see the live version of the app go to http://slackclone.herokuapp.com
+1. [React](https://facebook.github.io/react/) for UI
+2. [Babel](https://babeljs.io/) for ES6 and JSX transformation
+3. [Webpack](https://webpack.github.io/) for bundling
+4. [Socket.io](http://socket.io/) for real-time communication
+5. [Cosmic JS](https://cosmicjs.com) for saving and returning messages from a cloud-hosted API
 
-## Use Guide
+The following dev tools are used:
 
-First off, clone the repository and then `cd react-redux-socketio-chat`and `npm install`
+1. [ESLint](http://eslint.org/) to make sure our code is consistent
+2. [React Hot Loader](https://github.com/gaearon/react-hot-loader) for instant updates on save
 
-You can create channels with the + sign on the nav bar on the left.
-If you click on a user's name to send him a private message (opens a private channel)
-
-### Setting up MongoDB
-
-Note: You need MongoDB set up and running to run the code locally. [Installation instructions](https://docs.mongodb.org/manual/installation/)
-
-Once you've installed MongoDB start up the MongoDB server in a new terminal with the following commands:
-
+### Install
+Run the following commands to install the app:
 ```
-mkdir db
-mongod --dbpath=./db --smallfiles
+git clone https://github.com/tonyspiro/react-chat-app
+cd react-chat-app
+npm install
 ```
-
-Then open a new terminal and type in `mongo` and type in `use chat_dev`
-This is your database interface.  You can query the database for records for example: `db.users.find()` or `db.stats()`.  If you want to remove all channels for example you can type `db.channels.remove({})`.
-
-Now that you've done all that, you can go go ahead and code away!
-
-### Development
-
+#### Run in production
+Run the following command to run the app in production:
 ```
-npm run dev
-```
-And then point your browser to `localhost:3000`
-
-Note:
-This program comes with [redux-dev tools](https://github.com/gaearon/redux-devtools)
-* To SHOW or HIDE the dev tool panel press ctrl+h
-* To change position press ctrl+m
-
-### Production
-
-```
-npm run build
 npm start
 ```
-And then point your browser to `localhost:3000`
+View the app running in production at [http://localhost:3000](http://localhost:3000)
 
-## Helpful Resources and Inspiring Projects
+#### Run in development
+Run the following commands to run the app in development with hot reloading:
+```
+npm start server
+```
+and in another terminal tab run:
+```
+npm run development
+```
+View the app running in development at [http://localhost:8080](http://localhost:8080)
 
-* Erikras' universal redux example: https://github.com/erikras/react-redux-universal-hot-example
-* The facebook react flux-chat example: https://github.com/facebook/flux/tree/master/examples/flux-chat
-* The awesome community of reactiflux https://discordapp.com/channels/102860784329052160/102860784329052160
-
-## Todos
-* small profile page for users
-* implement reselect
-* implement async-props
+### Configure your own chat app
+1. Set up a bucket in [Cosmic JS](https://cosmicjs.com) with an object type of `messages`.
+2. Edit config.js:
+```javascript
+// config.js
+export default {
+  bucket: {
+    slug: 'your-bucket-slug',
+    type_slug: 'messages'
+  },
+  server: {
+    host: process.env.APP_URL || 'http://localhost:3000'
+  }
+}
+```
